@@ -26,10 +26,7 @@ const mctsConfig: MctsConfig = {
 const mcts = new MctsAlgorithm(mctsConfig);
 
 // Initialize your SDK
-const client = new GameClient(
-  "https://gigaverse.io",
-  ""
-);
+const client = new GameClient("https://gigaverse.io", "");
 
 /**
  * The main auto-play function.

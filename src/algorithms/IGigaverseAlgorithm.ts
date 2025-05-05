@@ -17,6 +17,7 @@ export enum GigaverseActionType {
   PICK_LOOT_ONE = "loot_one",
   PICK_LOOT_TWO = "loot_two",
   PICK_LOOT_THREE = "loot_three",
+  PICK_LOOT_FOUR = "loot_four",
   // Future: "use_item" etc.
 }
 

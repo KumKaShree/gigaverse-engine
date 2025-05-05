@@ -202,12 +202,13 @@ export class MctsAlgorithm implements IGigaverseAlgorithm {
   private getPossibleActions(state: GigaverseRunState): GigaverseAction[] {
     const acts: GigaverseAction[] = [];
 
-    // if lootPhase => pick from 1..3
+    // if lootPhase => pick from 1..4
     if (state.lootPhase && state.lootOptions.length > 0) {
       for (let i = 0; i < state.lootOptions.length; i++) {
         if (i === 0) acts.push({ type: GigaverseActionType.PICK_LOOT_ONE });
         if (i === 1) acts.push({ type: GigaverseActionType.PICK_LOOT_TWO });
         if (i === 2) acts.push({ type: GigaverseActionType.PICK_LOOT_THREE });
+        if (i === 3) acts.push({ type: GigaverseActionType.PICK_LOOT_FOUR });
       }
       return acts;
     }
@@ -260,6 +261,13 @@ export class MctsAlgorithm implements IGigaverseAlgorithm {
       }
       case GigaverseActionType.PICK_LOOT_THREE: {
         const chosenLoot = newSt.lootOptions[2];
+        this.simulator.applyLootOption(newSt, chosenLoot);
+        newSt.lootOptions = [];
+        newSt.lootPhase = false;
+        break;
+      }
+      case GigaverseActionType.PICK_LOOT_FOUR: {
+        const chosenLoot = newSt.lootOptions[3];
         this.simulator.applyLootOption(newSt, chosenLoot);
         newSt.lootOptions = [];
         newSt.lootPhase = false;
