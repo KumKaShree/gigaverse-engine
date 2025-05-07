@@ -4,6 +4,7 @@ import {
   Player as SdkPlayer,
   LootOption as SdkLootOption,
   EnemyEntity,
+  DungeonData,
 } from "@slkzgm/gigaverse-sdk/dist/client/types/game";
 import {
   GigaverseFighter,
@@ -13,7 +14,6 @@ import {
   GigaverseLootOption,
   GigaverseRunState,
 } from "./GigaverseTypes";
-import { ActionResponseData } from "@slkzgm/gigaverse-sdk";
 
 /**
  * Transform a server-side `Player` object into our minimal `GigaverseFighter`.
@@ -134,36 +134,38 @@ export function transformSdkLootOptions(
  * Adjust logic to match how your server data organizes players + enemies.
  */
 export function buildGigaverseRunState(
-  data: ActionResponseData,
+  data: DungeonData,
   allEnemies: EnemyEntity[]
 ): GigaverseRunState {
-  const { run, entity } = data;
-  // run => { players[], lootPhase, lootOptions, etc. }
-  // entity => { ROOM_NUM_CID, ... }
+  // Ensure we have valid run and entity data
+  if (!data.run) {
+    throw new Error("Missing dungeon run data (data.run is null)");
+  }
+  if (!data.entity) {
+    throw new Error("Missing dungeon entity data (data.entity is null)");
+  }
+
+  // After checks, safely narrow types
+  const run = data.run;
+  const entity = data.entity;
 
   const userPlayer = transformSdkPlayerToGigaverseFighter(run.players[0]);
 
-  // example: if we have 1 current enemy in run.players[1], or we look up by ROOM_NUM_CID
   const currentEnemyIndex = entity.ROOM_NUM_CID - 1;
-  // or set to 0 if uncertain
 
-  // Build an array of all enemies =>
-  // If your real design is just user+1 enemy in run.players, you can do simpler approach.
   const enemyFighters: GigaverseFighter[] = [];
   for (let i = 0; i < allEnemies.length; i++) {
-    // Some logic to see if this is the "current" enemy
     if (i === currentEnemyIndex) {
-      // transform the actual enemy in run.players[1]
+      // Current enemy from active run
       const eFighter = transformSdkPlayerToGigaverseFighter(run.players[1]);
       enemyFighters.push(eFighter);
     } else {
-      // or transform from the known list
+      // Predefined enemy template
       const eFighter = transformSdkEnemyEntityToGigaverseFighter(allEnemies[i]);
       enemyFighters.push(eFighter);
     }
   }
 
-  // transform loot if needed
   let lootOptions: GigaverseLootOption[] = [];
   if (run.lootPhase && run.lootOptions?.length) {
     lootOptions = run.lootOptions.map(transformSdkLootOptionToGigaverse);
