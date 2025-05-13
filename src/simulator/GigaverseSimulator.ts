@@ -14,6 +14,10 @@ import {
   GigaverseMoveState,
   GigaverseLootOption,
 } from "./GigaverseTypes";
+import {
+  GigaverseAction,
+  GigaverseActionType,
+} from "../algorithms/IGigaverseAlgorithm";
 
 /**
  * Possible moves in the Gigaverse.
@@ -439,6 +443,45 @@ export class GigaverseSimulator {
     this.logger.info(
       `[applyLootOption] Applied => ${boonTypeString}, +${selectedVal1}, +${selectedVal2}`
     );
+  }
+
+  public applyAction(
+    state: GigaverseRunState,
+    action: GigaverseAction
+  ): GigaverseRunState {
+    switch (action.type) {
+      case GigaverseActionType.MOVE_ROCK:
+        return this.simulateOneRound(state, GigaverseMove.ROCK);
+      case GigaverseActionType.MOVE_PAPER:
+        return this.simulateOneRound(state, GigaverseMove.PAPER);
+      case GigaverseActionType.MOVE_SCISSOR:
+        return this.simulateOneRound(state, GigaverseMove.SCISSOR);
+
+      case GigaverseActionType.PICK_LOOT_ONE:
+        this.applyLootOption(state, state.lootOptions[0]);
+        break;
+      case GigaverseActionType.PICK_LOOT_TWO:
+        this.applyLootOption(state, state.lootOptions[1]);
+        break;
+      case GigaverseActionType.PICK_LOOT_THREE:
+        this.applyLootOption(state, state.lootOptions[2]);
+        break;
+      case GigaverseActionType.PICK_LOOT_FOUR:
+        this.applyLootOption(state, state.lootOptions[3]);
+        break;
+
+      default:
+        this.logger.warn(`[applyAction] Unknown action type: ${action.type}`);
+        break;
+    }
+
+    // Réinitialisation après avoir choisi un loot
+    if (action.type.startsWith("loot")) {
+      state.lootOptions = [];
+      state.lootPhase = false;
+    }
+
+    return state;
   }
 
   // -----------------------------------------------------

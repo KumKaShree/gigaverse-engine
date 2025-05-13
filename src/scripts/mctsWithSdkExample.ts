@@ -3,7 +3,7 @@
  * Example script demonstrating how to:
  *   1) Fetch current dungeon state from the Gigaverse server
  *   2) Transform it into GigaverseRunState
- *   3) Use MctsAlgorithm to pick the next action (move/loot)
+ *   3) Use MctsAlgorithmEnhanced to pick the next action (move/loot)
  *   4) Display before/after state for the player/enemy
  *   5) Log which action it recommends
  * All logs in English only, production-ready.
@@ -132,7 +132,7 @@ function applyActionLocally(
   action: MctsAction
 ): GigaverseRunState {
   // We can call "simulateOneRound" or "applyLootOption" as MCTS does.
-  // We'll do a minimal approach. If you want, you can re-use the MctsAlgorithm logic.
+  // We'll do a minimal approach. If you want, you can re-use the MctsAlgorithmEnhanced logic.
   const newState: GigaverseRunState = JSON.parse(
     JSON.stringify(oldState)
   ) as GigaverseRunState;

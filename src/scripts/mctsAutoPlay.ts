@@ -19,7 +19,7 @@ import { buildGigaverseRunState } from "../simulator/GigaverseTransforms";
  */
 const mctsConfig: MctsConfig = {
   simulationsCount: 500,
-  maxDepth: 3,
+  maxDepth: 4,
   // or define evaluateFn if you want
 };
 

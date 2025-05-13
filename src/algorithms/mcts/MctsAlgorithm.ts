@@ -17,6 +17,7 @@ import { GigaverseRunState } from "../../simulator/GigaverseTypes";
 import { CustomLogger } from "../../types/CustomLogger";
 import { defaultLogger } from "../../utils/defaultLogger";
 import cloneDeep from "lodash/cloneDeep";
+import { defaultEvaluate } from "../defaultEvaluate";
 
 interface MctsNode {
   parent: MctsNode | null;
@@ -174,7 +175,7 @@ export class MctsAlgorithm implements IGigaverseAlgorithm {
     if (this.config.evaluateFn) {
       return this.config.evaluateFn(simState);
     } else {
-      return this.defaultEvaluate(simState);
+      return defaultEvaluate(simState);
     }
   }
 
@@ -276,15 +277,5 @@ export class MctsAlgorithm implements IGigaverseAlgorithm {
     }
 
     return newSt;
-  }
-
-  // -------------------------------------------
-  // Default Evaluate
-  // -------------------------------------------
-
-  private defaultEvaluate(state: GigaverseRunState): number {
-    const enemiesDefeated = state.currentEnemyIndex;
-    const aliveBonus = state.player.health.current > 0 ? 0.5 : 0;
-    return enemiesDefeated + aliveBonus;
   }
 }

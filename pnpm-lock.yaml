@@ -8,11 +8,14 @@ importers:
   .:
     dependencies:
       "@slkzgm/gigaverse-sdk":
-        specifier: ^0.0.7
-        version: 0.0.7
+        specifier: ^0.0.9
+        version: 0.0.9
       lodash:
         specifier: ^4.17.21
         version: 4.17.21
+      seedrandom:
+        specifier: ^3.0.5
+        version: 3.0.5
     devDependencies:
       "@types/lodash":
         specifier: ^4.17.16
@@ -211,11 +214,11 @@ packages:
       }
     engines: { node: ">=14" }
 
-  "@slkzgm/gigaverse-sdk@0.0.7":
+  "@slkzgm/gigaverse-sdk@0.0.9":
     resolution:
       {
-        integrity: sha512-ktezovXrZWTojtcp68T2H1PWceuDBPamOdGZqRLzj9YcNB2+to5jyUjdKCDrkKPgN+X9QPy3wGQyzXffzuSVVw==,
-        tarball: https://npm.pkg.github.com/download/@slkzgm/gigaverse-sdk/0.0.7/b3ee57fb178efd5676838f32937c6bbe6e8da430,
+        integrity: sha512-gRYnT/sXxnf4cW+1kOeflt7EXezW/NnOfUPN57rJ3UP1mMdoRMOHZ+cnRV2dOv07Bg08gt6miW4Ssb2Ah3UApw==,
+        tarball: https://npm.pkg.github.com/download/@slkzgm/gigaverse-sdk/0.0.9/9b2c93ba275a9d40f36c96c619a2183e385188b4,
       }
 
   "@tsconfig/node10@1.0.11":
@@ -1002,6 +1005,12 @@ packages:
         integrity: sha512-5l4VyZR86LZ/lDxZTR6jqL8AFE2S0IFLMP26AbjsLVADxHdhB/c0GUsH+y39UfCi3dzz8OlQuPmnaJOMoDHQBA==,
       }
 
+  seedrandom@3.0.5:
+    resolution:
+      {
+        integrity: sha512-8OwmbklUNzwezjGInmZ+2clQmExQPvomqjL7LFqOYqtmuxRgQYqOD3mHaU+MvZn5FLUeVxVfQjwLZW/n/JFuqg==,
+      }
+
   semver@7.7.1:
     resolution:
       {
@@ -1281,7 +1290,7 @@ snapshots:
   "@pkgjs/parseargs@0.11.0":
     optional: true
 
-  "@slkzgm/gigaverse-sdk@0.0.7": {}
+  "@slkzgm/gigaverse-sdk@0.0.9": {}
 
   "@tsconfig/node10@1.0.11": {}
 
@@ -1728,6 +1737,8 @@ snapshots:
   run-parallel@1.2.0:
     dependencies:
       queue-microtask: 1.2.3
+
+  seedrandom@3.0.5: {}
 
   semver@7.7.1: {}
 
