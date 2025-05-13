@@ -8,4 +8,4 @@ dist/
 .DS_Store
 .env
 .vscode/
-.idea
+.ideasrc/scenarios/*.json
