@@ -132,10 +132,9 @@ function compareAlgorithms(
   });
 }
 
-// Exécution correcte
 const scenarioFilePath = path.resolve(
   __dirname,
-  "../scenarios/scenario_500.json"
+  "../scenarios/scenario_10.json"
 );
 
 const initialState: GigaverseRunState = {
@@ -152,7 +151,6 @@ const initialState: GigaverseRunState = {
   lootOptions: [],
 };
 
-// Fournis ici tes ennemis réels
 const enemiesList: EnemyEntity[] = [
   {
     docId: "Enemy#1",
@@ -578,7 +576,6 @@ const minimax = new MinimaxAlgorithm({ maxDepth: 3 }, silentLogger);
 const dp = new DPAlgorithm({ maxHorizon: 4 }, silentLogger);
 const astar = new AStarAlgorithm({ maxIterations: 100 }, silentLogger);
 
-// Exemple initial state + liste d'ennemis (copier ton array enemiesList ici)
 compareAlgorithms(scenarioFilePath, initialState, enemiesList, [
   // { name: "MCTS", algorithm: mcts },
   // { name: "MCTS++", algorithm: mctsPlus },
