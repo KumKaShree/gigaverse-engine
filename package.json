@@ -28,7 +28,7 @@
     "typescript": "^5.8.3"
   },
   "dependencies": {
-    "@slkzgm/gigaverse-sdk": "^0.0.9",
+    "@slkzgm/gigaverse-sdk": "github:slkzgm/gigaverse-sdk",
     "lodash": "^4.17.21",
     "seedrandom": "^3.0.5"
   }
